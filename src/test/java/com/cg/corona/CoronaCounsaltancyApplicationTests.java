@@ -1,6 +1,7 @@
 package com.cg.corona;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 import org.aspectj.lang.annotation.Before;
@@ -29,26 +30,28 @@ class CoronaCounsaltancyApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+//
+////	@Test
+//@Before(value = "")
+//	public void setUp() {
+//		Laboratory laboratory=new Laboratory(1L,201,"Private",1200.00,"Covid- Test",1200.00,2400.00);
+//	
+//		try {
+//			Mockito.when(laboratoryService.findPatientById(laboratory.getPatientId())).thenReturn(laboratory);
+//		} catch (PatientIdException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 //	@Test
-@Before(value = "")
-	public void setUp() {
-		Laboratory laboratory=new Laboratory(1L,201,"Private",1200.00,"Covid- Test",1200.00,2400.00);
-	
-		try {
-			Mockito.when(laboratoryService.findPatientById(laboratory.getPatientId())).thenReturn(laboratory);
-		} catch (PatientIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//	 void FindPatintServiceDetailByPatientId_thenReturnServiceDetail() throws PatientIdException {
+//		int patientId=201;
+//		Laboratory laboratory=laboratoryService.findPatientById(patientId);	
+//		assertThat(laboratory.getPatientId()).isEqualTo(patientId);
+//		
+//	}
+	public void test() {
+		fail("Not");
 	}
-	@Test
-	 void FindPatintServiceDetailByPatientId_thenReturnServiceDetail() throws PatientIdException {
-		int patientId=201;
-		Laboratory laboratory=laboratoryService.findPatientById(patientId);	
-		assertThat(laboratory.getPatientId()).isEqualTo(patientId);
-		
-	}
-
 	
 }
