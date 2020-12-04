@@ -8,6 +8,7 @@ public class PatientIdException extends Exception {
 	
 	public PatientIdException(String message) {
 		super(message);
+		System.out.println(message);
 	}
 
 }

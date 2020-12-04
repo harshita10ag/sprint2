@@ -1,10 +1,8 @@
 package com.cg.corona.controller;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.corona.domain.Laboratory;
 import com.cg.corona.exception.PatientIdException;
 import com.cg.corona.service.LaboratoryService;
-import com.cg.corona.service.MapValidationErrorService;
 
 @RestController
 @RequestMapping("/api/v1/laboratory")
@@ -26,21 +23,11 @@ public class LaboratoryController {
 	@Autowired
 	private LaboratoryService labService;
 
-//	private MapValidationErrorService mapValidationErrorService;
-//
-//	@PostMapping
-//	public ResponseEntity<?> createNewProject(@Valid @RequestBody Laboratory laboratory, BindingResult result)
-//			throws PatientIdException {
-//		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
-//		if (errorMap != null) {
-//			return errorMap;
-//		}
-//		Laboratory lab = labService.createPatient(laboratory);
-//		return new ResponseEntity<Laboratory>(lab, HttpStatus.CREATED);
-//	}
-//	public Laboratory create(@RequestBody final Laboratory laboratory) {
-//		return labService
-//	}
+
+	@PostMapping
+	public Laboratory create(@RequestBody final Laboratory laboratory) throws PatientIdException {
+		return labService.createPatient(laboratory);
+	}
 
 	/**
 	 * 
@@ -61,7 +48,7 @@ public class LaboratoryController {
 	 * @return
 	 * @throws PatientIdException
 	 */
-	@PutMapping("/{patientId}")
+	@PutMapping("/update/{patientId}")
 	public ResponseEntity<?> updatePatient(@PathVariable int patientId, @RequestBody Laboratory laboratory)
 			throws PatientIdException {
 		return new ResponseEntity<Laboratory>(labService.updateOnCriteria(patientId, laboratory), HttpStatus.OK);
@@ -83,7 +70,7 @@ public class LaboratoryController {
 	 * @return
 	 * @throws PatientIdException
 	 */
-	@DeleteMapping("/{patientId}")
+	@DeleteMapping("delete/{patientId}")
 	public ResponseEntity<?> deletePatient(@PathVariable int patientId) throws PatientIdException {
 		labService.deletePatientById(patientId);
 		return new ResponseEntity<String>("Patient with Id : " + patientId + " Deleted!", HttpStatus.OK);

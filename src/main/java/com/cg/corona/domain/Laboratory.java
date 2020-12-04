@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Entity(name = "service_master")
 public class Laboratory {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private int patientId;
 	private String testName;
@@ -24,6 +24,21 @@ public class Laboratory {
 	private double totalBill;
 	
 	
+	
+	public Laboratory() {
+		super();
+	}
+	public Laboratory(Long id, int patientId, String testName, double testPrice, String roomType, double roomPrice,
+			double totalBill) {
+		super();
+		this.id = id;
+		this.patientId = patientId;
+		this.testName = testName;
+		this.testPrice = testPrice;
+		this.roomType = roomType;
+		this.roomPrice = roomPrice;
+		this.totalBill = totalBill;
+	}
 	/**
 	 * @return the id
 	 */
