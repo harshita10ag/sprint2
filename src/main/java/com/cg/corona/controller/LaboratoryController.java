@@ -13,34 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.corona.domain.Laboratory;
-import com.cg.corona.exception.PatientIdException;
+import com.cg.corona.exception.ServiceNotFoundException;
 import com.cg.corona.service.LaboratoryService;
-
+/**
+ * 
+ * @author HARSHITA AGARWAL
+ * controlling all the test cases and run the program through the  service class
+ *
+ */
 @RestController
 @RequestMapping("/api/v1/laboratory")
 public class LaboratoryController {
 
 	@Autowired
 	private LaboratoryService labService;
-
+	
+	@GetMapping("/{patientId}")
+	public ResponseEntity<Laboratory> getServiceDetail(@PathVariable int patientId) throws ServiceNotFoundException {
+		Laboratory laboratory=labService.findPatientById(patientId);
+		return new ResponseEntity<>(laboratory,HttpStatus.OK);
+	}
 
 	@PostMapping
-	public Laboratory create(@RequestBody final Laboratory laboratory) throws PatientIdException {
+	public Laboratory create(@RequestBody final Laboratory laboratory) throws ServiceNotFoundException {
 		return labService.createPatient(laboratory);
 	}
-
-	/**
-	 * 
-	 * @param patientId
-	 * @return
-	 * @throws PatientIdException
-	 */
-	@GetMapping
-	@RequestMapping("/{patientId}")
-	public ResponseEntity<?> getLaboratoryServiceByPatientId(@PathVariable int patientId) throws PatientIdException {
-		return new ResponseEntity<Laboratory>(labService.findPatientById(patientId), HttpStatus.OK);
-	}
-
 	/**
 	 * 
 	 * @param patientId
@@ -50,7 +47,7 @@ public class LaboratoryController {
 	 */
 	@PutMapping("/update/{patientId}")
 	public ResponseEntity<?> updatePatient(@PathVariable int patientId, @RequestBody Laboratory laboratory)
-			throws PatientIdException {
+			throws ServiceNotFoundException {
 		return new ResponseEntity<Laboratory>(labService.updateOnCriteria(patientId, laboratory), HttpStatus.OK);
 	}
 
@@ -70,10 +67,11 @@ public class LaboratoryController {
 	 * @return
 	 * @throws PatientIdException
 	 */
+
 	@DeleteMapping("delete/{patientId}")
-	public ResponseEntity<?> deletePatient(@PathVariable int patientId) throws PatientIdException {
-		labService.deletePatientById(patientId);
-		return new ResponseEntity<String>("Patient with Id : " + patientId + " Deleted!", HttpStatus.OK);
+	public ResponseEntity<?> deletePatient(@PathVariable int patientId) throws ServiceNotFoundException {
+		Boolean service=labService.deletePatientById(patientId);
+		return ResponseEntity.ok(service);
 	}
 
 }

@@ -23,15 +23,13 @@ public class Laboratory {
 	private double roomPrice;
 	private double totalBill;
 	
-	
-	
 	public Laboratory() {
-		super();
+		
 	}
-	public Laboratory(Long id, int patientId, String testName, double testPrice, String roomType, double roomPrice,
+	
+	public Laboratory( int patientId, String testName, double testPrice, String roomType, double roomPrice,
 			double totalBill) {
 		super();
-		this.id = id;
 		this.patientId = patientId;
 		this.testName = testName;
 		this.testPrice = testPrice;
@@ -123,6 +121,8 @@ public class Laboratory {
 	public void setRoomPrice(double roomPrice) {
 		this.roomPrice = roomPrice;
 	}
+
+	
 	
 	
 }

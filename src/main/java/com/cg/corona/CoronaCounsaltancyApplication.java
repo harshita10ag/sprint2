@@ -1,5 +1,8 @@
 package com.cg.corona;
-
+/**
+ * Author - Harshita Agarwal
+ * Run the Application
+ */
 import org.jboss.logging.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
